@@ -12,3 +12,4 @@ Este projeto foi criado durante a disciplina de Introdução a Técnicas de Prog
 * **O projeto está definido em 4 etapas:**
 * **etapa 1:** Contém as classes Cor e Paleta de Cores juntamente com os métodos asssociados a estas. ...
 
+
