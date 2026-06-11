@@ -1,5 +1,7 @@
+#pragma once
 #include "Cor.h"
 #include <string>
+#pragma once
 
 Cor converterRGB(std::string hexa){
     Cor cor; 
@@ -25,24 +27,9 @@ Cor converterRGB(std::string hexa){
         
         rgb = primeiro*16 + segundo;
         
-        if(i == 2){cor.setR(rgb);}
-        if(i == 4){cor.setG(rgb);}
-        if(i == 6){cor.setB(rgb);}
+        if(i == 2){cor.r = rgb;}
+        if(i == 4){cor.g = rgb;}
+        if(i == 6){cor.b = rgb;}
     }
 
-}
-
-std::string converterHexa(Cor cor){
-    std::string hexa = "#";
-    
-    cor.getR() >  ?(hexa.push_back(std::to_string(cor.getR()/ 16));
-    hexa.push_back(cor.getR() % 16);
-    
-    hexa.push_back(cor.getG() / 16);
-    hexa.push_back(cor.getG() % 16);
-    
-    hexa.push_back(cor.getB() / 16);
-    hexa.push_back(cor.getB() % 16);
-
-    for
 }
