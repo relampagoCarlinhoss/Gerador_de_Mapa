@@ -8,11 +8,11 @@ class Paleta {
     int tamanho = 0; 
     
 public:
+    //construtores
     Paleta() { tamanho = 0; }
-
-    Paleta(const std::string& nome_arquivo); 
-
-    void setTamanho(int t);    
+    Paleta(const std::string& nomeArquivo); 
+    
+    //metodos
     void adicionarCor(Cor cor); 
     int consultarTamanho();
     Cor consultarCor(int indice); 

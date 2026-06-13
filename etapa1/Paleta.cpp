@@ -26,9 +26,9 @@ Cor conversorRGB(std::string h){
     return cor;
 }
 
-Paleta::Paleta(const std::string& nome_arquivo){
+Paleta::Paleta(const std::string& nomeArquivo){
     tamanho = 0;
-    std::ifstream arquivo(nome_arquivo);
+    std::ifstream arquivo(nomeArquivo);
     
     std::string hexa;
     if(arquivo.is_open()){

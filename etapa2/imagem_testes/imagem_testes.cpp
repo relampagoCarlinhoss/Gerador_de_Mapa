@@ -1,11 +1,11 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "../doctest.h"
-#include "imagem.h"
+#include "doctest.h"
+#include "../Imagem.h"
 
 TEST_CASE("Testa a criação de uma imagem com largura e altura específicas") {
     Imagem img(100, 50);
-    CHECK(img.obterLargura() == 100);
-    CHECK(img.obterAltura() == 50);
+    CHECK(img.consultarLargura() == 100);
+    CHECK(img.consultarAltura() == 50);
 }
 
 TEST_CASE("Testa a modificação e acesso aos pixels da imagem") {
@@ -23,8 +23,8 @@ TEST_CASE("Testa a leitura de uma imagem em formato PPM") {
     Imagem img;
     bool sucesso = img.lerPPM("imagem.ppm");
     CHECK(sucesso);
-    CHECK(img.obterLargura() == 3);
-    CHECK(img.obterAltura() == 2);
+    CHECK(img.consultarLargura() == 3);
+    CHECK(img.consultarAltura() == 2);
 
     const Pixel& p1 = img(0, 0);
     CHECK(p1.r == 255);
@@ -35,7 +35,7 @@ TEST_CASE("Testa a leitura de uma imagem em formato PPM") {
     CHECK(p2.r == 0);
     CHECK(p2.g == 255);
     CHECK(p2.b == 0);
-
+    
     const Pixel& p3 = img(0, 1); // (x,y) = (0,1)
     CHECK(p3.r == 255);
     CHECK(p3.g == 255);
