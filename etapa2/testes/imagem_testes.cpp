@@ -1,8 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
+#include "../Imagem.cpp"
 #include "../Imagem.h"
 
-TEST_CASE("Tesfsta a criação de uma imagem com largura e altura específicas") {
+TEST_CASE("Testa a criação de uma imagem com largura e altura específicas") {
     Imagem img(100, 50);
     CHECK(img.consultarLargura() == 100);
     CHECK(img.consultarAltura() == 50);
@@ -54,7 +55,7 @@ TEST_CASE("Testa a salvamento da imagem em formato PPM") {
     img(0, 1) = {0, 0, 255};   // azul
     img(1, 1) = {255, 255, 0}; // amarelo
 
-    bool sucesso = img.salvarPPM("teste.ppm");
+    bool sucesso = img.salvarPPM("teste1.ppm");
     CHECK(sucesso);
 
     // Verifica se o arquivo foi criado corretamente
