@@ -1,12 +1,14 @@
 #pragma once
 #include "./Pixel.h"
+#include <string>
+#include "fstream"
 
 class Imagem{
     int largura; 
     int altura;
-    Pixel *pixels;
-
+    Pixel** pixels;
     public:
+
     //construtores
     Imagem(){
         largura = 0;
@@ -14,16 +16,24 @@ class Imagem{
         pixels = nullptr;
     }
 
-    Imagem(int larguraP, int alturaP){
-        larguraP = largura;
-        alturaP = altura;
-        pixels = new Pixel[largura*altura];
-    } 
+    Imagem(int l, int a) {
+        largura = l;
+        altura = a; 
+        pixels = new Pixel*[altura];
+        for (int i = 0; i < altura; i++) {
+            pixels[i] = new Pixel[largura];
+        }
+    }
 
     //destrutor
-    ~Imagem(){delete[]pixels;}
+    ~Imagem() {
+        for (int i = 0; i < altura; i++) {
+            delete[] pixels[i]; 
+        }
+        delete[] pixels;
+    }
 
-    //get e set:
+    //get:
     int consultarLargura(){return largura;}
     int consultarAltura(){return altura;}
     
@@ -33,6 +43,8 @@ class Imagem{
 
     //operador
     Pixel& operator()(int x, int y);
+    const Pixel& operator()(int x, int y) const;
+
 };
 
 
