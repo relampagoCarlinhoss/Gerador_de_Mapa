@@ -2,7 +2,7 @@
 #include "doctest.h"
 #include "../Imagem.h"
 
-TEST_CASE("Testa a criação de uma imagem com largura e altura específicas") {
+TEST_CASE("Tesfsta a criação de uma imagem com largura e altura específicas") {
     Imagem img(100, 50);
     CHECK(img.consultarLargura() == 100);
     CHECK(img.consultarAltura() == 50);
