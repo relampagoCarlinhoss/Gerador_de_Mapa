@@ -42,8 +42,8 @@ class Imagem{
     bool salvarPPM(const std::string &nomeArquivo);
 
     //operador
+    //Pixel& operator()(int x, int y);
     Pixel& operator()(int x, int y);
-    const Pixel& operator()(int x, int y) const;
 
 };
 

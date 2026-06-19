@@ -26,15 +26,13 @@ Cor conversorRGB(std::string h){
     return cor;
 }
 
-Paleta::Paleta(const std::string& nomeArquivo){
-    tamanho = 0;
-    std::ifstream arquivo(nomeArquivo);
+Paleta::Paleta(const std::string& nome_arquivo){
+    std::ifstream arquivo(nome_arquivo);
     
     std::string hexa;
     if(arquivo.is_open()){
         while(std::getline(arquivo, hexa)){    
             paleta.push_back(conversorRGB(hexa));
-            tamanho = paleta.size();
         }
         arquivo.close();
     }
@@ -42,13 +40,12 @@ Paleta::Paleta(const std::string& nomeArquivo){
 
 void Paleta::adicionarCor(Cor cor){
     paleta.push_back(cor);
-    tamanho = paleta.size();
 }
 
-int Paleta::consultarTamanho(){ return tamanho; }
+int Paleta::consultarTamanho(){ return paleta.size();}
 
 Cor Paleta::consultarCor(int indice){
-    if (indice < 0 || indice >= tamanho) {
+    if (indice < 0 || indice >= paleta.size()){
         return Cor{0, 0, 0}; 
     }
     return paleta[indice]; 

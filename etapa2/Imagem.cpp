@@ -2,12 +2,12 @@
 #include "Imagem.h"
 #include <iostream>
 #include <fstream>
-
+/*
 Pixel& Imagem::operator()(int x, int y){
     return pixels[y][x];
 };
 
-const Pixel& Imagem::operator()(int x, int y) const{
+*/Pixel& Imagem::operator()(int x, int y){
     return pixels[y][x];
 }
 
