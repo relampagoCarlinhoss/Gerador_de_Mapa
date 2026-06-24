@@ -63,6 +63,7 @@ bool Imagem::salvarPPM(const std::string &nomeArquivo){
             arquivo << p.r << " " << p.g << " " << p.b << std::endl;
         }
     }
+    arquivo.close();
 
     return true;
 }
