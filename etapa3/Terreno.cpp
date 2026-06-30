@@ -14,9 +14,9 @@
     Terreno::Terreno(int numero, double r) {
         n = numero;
         rugosidade = r;
-        terreno = new double*[n];
+        terreno = new int*[n];
         for (int i = 0; i < n; i++) {
-            terreno[i] = new double[n];
+            terreno[i] = new int[n];
             for (int j = 0; j < n; j++) {
                 terreno[i][j] = 0.0;
             }
@@ -103,7 +103,7 @@
             
             min *=r;
             max *= r;
-            return diamondSquare(tamanho/2, r);
+            return diamondSquare(tamanho/2, r/2);
         
     }
 
@@ -124,9 +124,9 @@
         }
          
         //preenchimento das bordas com limite superior e inferior. 
-        terreno = new double*[n]; 
+        terreno = new int*[n]; 
         for(int i = 0; i < n; i++){
-            terreno[i] = new double [n];
+            terreno[i] = new int [n];
             for(int j = 0; j < n; j++){
                 terreno[i][j] = 0.0;
             }
@@ -147,7 +147,7 @@
         return n; 
     }
 
-    double Terreno::consultarAltitude(int l, int c){
+    int Terreno::consultarAltitude(int l, int c){
             return terreno[l][c]; 
     }
 
@@ -187,9 +187,9 @@
         }
 
         n = novoN;
-        terreno = new double*[n];
+        terreno = new int*[n];
         for (int i = 0; i < n; ++i) {
-            terreno[i] = new double[n];
+            terreno[i] = new int[n];
                 for (int j = 0; j < n; j++) {
                     arquivo >> terreno[i][j]; 
                 }

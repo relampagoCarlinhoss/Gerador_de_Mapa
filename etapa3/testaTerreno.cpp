@@ -1,5 +1,4 @@
-
-#include "Terreno.cpp"
+#include "Terreno.h"
 
 int main(){
     Terreno ter;
