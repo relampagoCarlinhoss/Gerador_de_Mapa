@@ -2,23 +2,30 @@
 #include <fstream>
 #include <string>
 #include <cstdlib> 
-#include <ctime> 
+#include <ctime>
+#include <cmath>
+#include "../etapa1/Paleta.h"
 #include "Terreno.h"
+#include "../etapa2/Imagem.h"
 
     Terreno::Terreno() {
         n = 0;
         rugosidade = 0.0;
         terreno = nullptr;
+        max=0;
+        min=0;
     }
 
     Terreno::Terreno(int numero, double r) {
         n = numero;
         rugosidade = r;
+        max=0;
+        min=0;
         terreno = new int*[n];
         for (int i = 0; i < n; i++) {
             terreno[i] = new int[n];
             for (int j = 0; j < n; j++) {
-                terreno[i][j] = 0.0;
+                terreno[i][j] = 0;
             }
         }
     }
@@ -88,7 +95,7 @@
                 }
 
                 if(pontos > 0){
-                    terreno[i][j] = (soma + gerarNmr(min, max))/pontos;
+                    terreno[i][j] = (int)(soma/pontos) + gerarNmr(min, max);
                 }
             }
         }       
@@ -101,9 +108,9 @@
             square(tamanho);
             diamond(tamanho);
             
-            min *=r;
-            max *= r;
-            return diamondSquare(tamanho/2, r/2);
+            min = (int)(min * r);
+            max = (int)(max * r);
+            return diamondSquare(tamanho/2, r);
         
     }
 
@@ -113,8 +120,8 @@
         
         n = tamTerreno;
         rugosidade= r;
-        max=20;
-        min =0; 
+        min = -tamTerreno; 
+        max = tamTerreno;
     
         if (terreno != nullptr) {
             for (int i = 0; i < n; i++) {
@@ -123,15 +130,15 @@
             delete[] terreno;
         }
          
-        //preenchimento das bordas com limite superior e inferior. 
         terreno = new int*[n]; 
         for(int i = 0; i < n; i++){
             terreno[i] = new int [n];
             for(int j = 0; j < n; j++){
-                terreno[i][j] = 0.0;
+                terreno[i][j] = 0;
             }
         }
 
+        
         terreno[0][0] = gerarNmr(min, max);
         terreno[0][n - 1] = gerarNmr(min, max);
         terreno[n - 1][0] = gerarNmr(min, max);
@@ -196,6 +203,59 @@
         }
         arquivo.close();
         return true;
+    }
+
+    bool Terreno::sombrear(int i, int j){
+
+        if(j==0|| i==0){
+            return false; 
+
+        }
+        int valorAtual = terreno[i][j];
+        int valorDiagonal = terreno[i-1][j-1]; 
+        if (valorDiagonal > valorAtual) {
+            return true;
+        }else{
+            return false; 
+        }
+    }
+    void Terreno:: gerarMapadeCores(Paleta &paleta, std::string &arquivo, int tamanho, double rugosidade, double redutor){
+
+        Imagem imagem(tamanho, tamanho);
+        int tamPaleta= paleta.consultarTamanho();
+        geradorDeMapa(tamanho, rugosidade);
+
+        int altMin = terreno[0][0];
+        int altMax = terreno[0][0];
+        for(int i = 0; i < tamanho; i++){
+            for(int j = 0; j < tamanho; j++){
+                if(terreno[i][j] < altMin) altMin = terreno[i][j];
+                if(terreno[i][j] > altMax) altMax = terreno[i][j];
+            }
+        }
+
+        for(int i=0;i<tamanho;i++){
+            for(int j=0;j<tamanho;j++){
+                int altitude = terreno[i][j];
+                
+                int indice = 0;
+                if (altMax != altMin){
+                    indice = (altitude - altMin) * (tamPaleta - 1) / (altMax - altMin);
+                }
+
+                Cor c = paleta.consultarCor(indice);
+                Pixel p; 
+                if (sombrear(i, j)) {
+                    p = { (int)(c.r * redutor), (int)(c.g * redutor), (int)(c.b * redutor) };
+                }else{
+                    p = { c.r, c.g, c.b };
+                }
+                imagem(j, i) = p;
+        
+            }
+        }
+
+        imagem.salvarPPM(arquivo);
     }
 
 

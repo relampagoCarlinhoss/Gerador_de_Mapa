@@ -1,4 +1,3 @@
-#pragma once
 #include "Imagem.h"
 #include <iostream>
 #include <fstream>
